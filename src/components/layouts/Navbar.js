@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 
-import {
-  View,
-} from 'react';
-
 class Navbar extends Component {
   render() {
     return (
