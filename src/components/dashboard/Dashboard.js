@@ -4,8 +4,29 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profileActions";
 import Spinner from '../common/Spinner';
+import Modal from '../common/Modal';
 
 class Dashboard extends Component {
+	constructor(props) {
+	  super(props);
+	
+	  this.state = { 
+		show: false,
+		title: "Hello"
+	  };
+	}
+
+	showModal = () => {
+		this.setState({show : true});
+	}
+
+	hideModal = () => {
+		this.setState({
+			show: false
+		});
+	}
+	
+
 	componentDidMount() {
 		this.props.getCurrentProfile();
 	}
@@ -27,7 +48,15 @@ class Dashboard extends Component {
   				<div>
 					<p className="lead text-muted">Welcome { user.name }</p>
 					<p>You have yet setup a profile</p>
-					<Link to="/create-profile" className="btn btn-lg btn-info">Create Profile</Link>
+					<Link to="/create-profile" className="btn btn-lg btn-info">Create Profile</Link><hr />
+					<button className="btn btn-lg btn-info" onClick={this.showModal}>open modal</button>
+					<h1>React Model</h1>
+					<Modal show={this.state.show} handleClose={this.hideModal}>
+						<p>Modal</p>
+						<p>Data</p>
+						<p title={this.state.title}></p>
+
+					</Modal>
   				</div>
 				
 				)
